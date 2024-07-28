@@ -1,6 +1,7 @@
 # Ci workflow for running tests
 name: CI tests
-
+env:
+  CI: true
 on:
   push:
     branches:
