@@ -39,12 +39,12 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: 'Bump version to ${{ env.version }}'
-          title: 'Bump version to ${{ env.version }}'
-          branch: 'bump-version-${{ env.version }}'
+          commit-message: 'Bump version to ${{ env.VERSION }}'
+          title: 'Bump version to ${{ env.VERSION }}'
+          branch: 'bump-version-${{ env.VERSION }}'
           body: |
             PR Automatically create by release workflow
-            Update version to ${{ env.version }}
+            Update version to ${{ env.VERSION }}
             ![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIlVvTj8u03epPJptYkVccM3JTI8tHWx5nPg&s)
 
             Next: Merge this PR to main branch
