@@ -18,8 +18,10 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - name: Get Token
-        uses: tibdex/github-app-token@v1
+      - name: Set up Git
+        run: |
+          git config --global user.email "rooms.cave@gmail.com"
+          git config --global user.name "rooms cave"
 
       - name: Checkout code
         uses: actions/checkout@v4
