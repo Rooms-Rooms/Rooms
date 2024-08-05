@@ -33,7 +33,7 @@ jobs:
         run: yarn install
 
       - name: Check & bump version
-        run: git config set version-git-message "updating to v%s" && yarn version --${{ github.event.inputs.release_type }}
+        run: yarn version --${{ github.event.inputs.release_type }}
 
       - name: Get Version
         run: echo "VERSION=$(yarn run --silent getVersion)" >> $GITHUB_ENV
@@ -50,7 +50,6 @@ jobs:
 
             PR Automatically create by release workflow
             Update version to ${{ env.VERSION }}
-
 
             Next: Merge this PR to main branch
           labels: automated pr
