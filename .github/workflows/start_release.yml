@@ -1,0 +1,57 @@
+name: Start Release
+on:
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Type of release'
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+env:
+  ROOMS_TOKEN: ${{ secrets.ROOMS_TOKEN }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Check & bump version
+        run: yarn version --${{ github.event.inputs.release_type }}
+
+      - name: Push changes
+        run: |
+          git push --follow-tags'
+
+      - name: Get Version
+        run: echo "version=$(yarn run --silent version)" >> $GITHUB_ENV
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'Bump version to ${{ env.version }}'
+          title: 'Bump version to ${{ env.version }}'
+          branch: 'bump-version-${{ env.version }}'
+          body: |
+            PR Automatically create by release workflow
+            Update version to ${{ env.version }}
+            ![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIlVvTj8u03epPJptYkVccM3JTI8tHWx5nPg&s)
+
+            Next: Merge this PR to main branch
+          labels: automated pr
+          delete-branch: true
+
+      - name: Auto Merge
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: '1'
