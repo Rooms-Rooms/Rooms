@@ -12,7 +12,7 @@ on:
           - major
 
 env:
-  ROOMS_TOKEN: ${{ secrets.ROOMS_TOKEN }}
+  ROOMS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   release:
