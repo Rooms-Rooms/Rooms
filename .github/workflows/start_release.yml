@@ -17,6 +17,9 @@ env:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Set up Git
         run: |
@@ -55,4 +58,4 @@ jobs:
         uses: peter-evans/enable-pull-request-automerge@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          pull-request-number: '1'
+          pull-request-number: ${{ steps.create_pull_request.outputs.pull-request-number }}
