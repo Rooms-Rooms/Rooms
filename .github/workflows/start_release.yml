@@ -33,7 +33,7 @@ jobs:
         run: yarn install
 
       - name: Check & bump version
-        run: yarn version --${{ github.event.inputs.release_type }}
+        run: git config set version-git-message "updating to v%s" && yarn version --${{ github.event.inputs.release_type }}
 
       - name: Get Version
         run: echo "VERSION=$(yarn run --silent getVersion)" >> $GITHUB_ENV
@@ -44,11 +44,13 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'Bump version to ${{ env.VERSION }}'
           title: 'Bump version to ${{ env.VERSION }}'
-          branch: 'bump-version-${{ env.VERSION }}'
+          branch: '${{ env.VERSION }}'
           body: |
+            <img src="https://cdn.dribbble.com/users/594253/screenshots/4256966/bump-tumblr.gif" width="500"/>
+
             PR Automatically create by release workflow
             Update version to ${{ env.VERSION }}
-            ![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIlVvTj8u03epPJptYkVccM3JTI8tHWx5nPg&s)
+
 
             Next: Merge this PR to main branch
           labels: automated pr
