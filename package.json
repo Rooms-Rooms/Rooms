@@ -10,7 +10,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test.e2e": "cypress run",
-    "lint": "eslint"
+    "lint": "eslint",
     "test": "vitest",
     "getVersion": "echo $npm_package_version",
     "postVersion": "git push --setupstream origin v($npm_package_version)"
