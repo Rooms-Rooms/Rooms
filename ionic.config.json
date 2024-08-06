@@ -1,0 +1,7 @@
+{
+  "name": "roomsApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
