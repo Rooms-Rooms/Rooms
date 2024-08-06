@@ -1,15 +1,20 @@
 {
   "name": "roomsApp",
   "private": true,
-  "version": "0.0.1",
+
+  "version": "0.0.3",
+
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test.e2e": "cypress run",
-    "test.unit": "vitest",
     "lint": "eslint"
+    "test": "vitest",
+    "getVersion": "echo $npm_package_version",
+    "postVersion": "git push --setupstream origin v($npm_package_version)"
+
   },
   "dependencies": {
     "@capacitor/app": "6.0.0",

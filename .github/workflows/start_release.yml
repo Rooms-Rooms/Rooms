@@ -1,0 +1,56 @@
+name: Start Release
+on:
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Type of release'
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+env:
+  ROOMS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Set up Git
+        run: |
+          git config --global user.email "noreply@github.com"
+          git config --global user.name "GitHub Actions"
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Check & bump version
+        run: yarn version --${{ github.event.inputs.release_type }}
+
+      - name: Get Version
+        run: echo "VERSION=$(yarn run --silent getVersion)" >> $GITHUB_ENV
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'Bump version to ${{ env.VERSION }}'
+          title: 'Bump version to ${{ env.VERSION }}'
+          branch: '${{ env.VERSION }}'
+          body: |
+            <img src="https://cdn.dribbble.com/users/594253/screenshots/4256966/bump-tumblr.gif" width="500"/>
+
+            PR Automatically create by release workflow
+            Update version to ${{ env.VERSION }}
+
+            Next: Merge this PR to main branch
+          labels: automated pr
+          delete-branch: true
