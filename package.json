@@ -1,36 +1,56 @@
 {
-  "name": "rooms-app",
+  "name": "roomsApp",
   "private": true,
+
   "version": "0.0.3",
+
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "build": "tsc && vite build",
     "preview": "vite preview",
+    "test.e2e": "cypress run",
+    "lint": "eslint",
     "test": "vitest",
     "getVersion": "echo $npm_package_version",
     "postVersion": "git push --setupstream origin v($npm_package_version)"
+
   },
   "dependencies": {
-    "@ionic/cli-utils": "^2.2.1",
-    "@supabase/supabase-js": "^2.44.4",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "@capacitor/app": "6.0.0",
+    "@capacitor/core": "6.1.1",
+    "@capacitor/haptics": "6.0.0",
+    "@capacitor/keyboard": "6.0.1",
+    "@capacitor/status-bar": "6.0.0",
+    "@ionic/react": "^8.0.0",
+    "@ionic/react-router": "^8.0.0",
+    "@supabase/supabase-js": "^2.45.0",
+    "@types/react-router": "^5.1.20",
+    "@types/react-router-dom": "^5.3.3",
+    "ionicons": "^7.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router": "^5.3.4",
+    "react-router-dom": "^5.3.4"
   },
   "devDependencies": {
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.4.8",
-    "@testing-library/react": "^16.0.0",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
-    "eslint": "^8.57.0",
-    "eslint-plugin-react": "^7.34.3",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-react-refresh": "^0.4.7",
-    "jsdom": "^24.1.1",
-    "vite": "^5.3.4",
-    "vitest": "^2.0.4"
-  }
+    "@capacitor/cli": "6.1.1",
+    "@testing-library/dom": ">=7.21.4",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@vitejs/plugin-legacy": "^5.0.0",
+    "@vitejs/plugin-react": "^4.0.1",
+    "cypress": "^13.5.0",
+    "eslint": "^8.35.0",
+    "eslint-plugin-react": "^7.32.2",
+    "jsdom": "^22.1.0",
+    "terser": "^5.4.0",
+    "typescript": "^5.1.6",
+    "vite": "~5.2.0",
+    "vitest": "^0.34.6"
+  },
+  "description": "An Ionic project"
 }
