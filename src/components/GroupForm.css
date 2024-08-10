@@ -1,0 +1,18 @@
+.form-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 15px 20px; /* Optional: Add padding for spacing */
+    box-sizing: border-box;
+}
+
+.form-title p {
+    margin: 0;
+    text-align: center;
+    flex-grow: 1; 
+}
+
+.ion-padding {
+    margin: 0.5rem;
+}
